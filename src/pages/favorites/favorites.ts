@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, MenuController } from 'ionic-angular';
 import { Quote } from '../../data/quote.interface';
 import { QuotesService } from '../../services/quotes';
 import { QuotePage } from '../quote/quote';
@@ -21,7 +21,8 @@ export class FavoritesPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private quotesService: QuotesService,
-              private modalCtrl: ModalController) {}
+              private modalCtrl: ModalController,
+              private menuCtrl: MenuController) {}
 
   ionViewWillEnter() {
     this.quotes = this.quotesService.getFavoriteQuotes();
@@ -40,6 +41,10 @@ export class FavoritesPage {
   onRemoveFromFavorites(quote: Quote) {
     this.quotesService.removeQuoteFromFavorites(quote);
     this.quotes = this.quotesService.getFavoriteQuotes();
+  }
+
+  onOpenMenu() {
+    this.menuCtrl.open();
   }
 
 }
